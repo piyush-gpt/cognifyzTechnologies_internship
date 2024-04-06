@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Gallery</title>
+<style>
+    body{
+        background-color: rgb(207, 139, 162);
+    }
+    h1{
+        text-align: center;
+        text-decoration: underline;
+    }
+    #secondh1{
+        margin-top: 100px;
+    }
+  /* Gallery container */
+  .gallery {
+    border: 2px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:5px;
+    margin-bottom: 20px;
+  }
+
+  /* Thumbnail images */
+  .thumbnail {
+    margin: 5px;
+    height: 300px;
+    border: 2px solid blue;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .thumbnail:hover {
+    transform: scale(1.1);
+  }
+
+  /* Enlarged image container */
+  .enlarged-container {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+  }
+
+  /* Enlarged image */
+  .enlarged-image {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 70%;
+    max-width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Slideshow */
+  .slideshow{
+    display: flex;
+    justify-content: center;
+    border: 2px solid green;
+  }
+  .slideshow img {
+    width: 40%;
+    height: auto;
+    display: none;
+    padding: 10px;
+  }
+  .slideshow #firstimg{
+    display: inline-block;
+  }
+
+  div span{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<!-- Gallery with thumbnail images -->
+<h1>Showcasing Image gallery and automatic Slide2Show</h1>
+<h1>Image Gallery</h1>
+<div class="gallery">
+  <img class="thumbnail" src="images/catering.jpg" alt="Image 1">
+  <img class="thumbnail" src="images/delievery.jpg" alt="Image 2">
+  <img class="thumbnail" src="images/fresh.jpg" alt="Image 3">
+  <img class="thumbnail" src="images/catering.jpg" alt="Image 1">
+  <img class="thumbnail" src="images/delievery.jpg" alt="Image 2">
+  <img class="thumbnail" src="images/fresh.jpg" alt="Image 3">
+  <img class="thumbnail" src="images/catering.jpg" alt="Image 1">
+  <img class="thumbnail" src="images/delievery.jpg" alt="Image 2">
+  <img class="thumbnail" src="images/fresh.jpg" alt="Image 3">
+</div>
+<div class="enlarged-container">
+  <span class="close" onclick="closeEnlarged()"></span>
+  <img class="enlarged-image" src="" alt="Enlarged Image">
+</div>
+<h1 id="secondh1">Slide Show</h1>
+<!-- Slideshow -->
+<div class="slideshow">
+  <img src="images/catering.jpg" alt="Image mag" id="firstimg">
+  <img src="images/delievery.jpg" alt="Image 2">
+  <img src="images/fresh.jpg" alt="Image 3">
+</div>
+
+<script>
+  // Function to display enlarged image when thumbnail is clicked
+  var thumbnails = document.querySelectorAll('.thumbnail');
+  var enlargedContainer = document.querySelector('.enlarged-container');
+  var enlargedImage = document.querySelector('.enlarged-image');
+
+  thumbnails.forEach(function(thumbnail) {
+    thumbnail.addEventListener('click', function() {
+      enlargedContainer.style.display = 'block';
+      enlargedImage.src = thumbnail.src;
+    });
+  });
+
+  // Function to close enlarged image
+  function closeEnlarged() {
+    enlargedContainer.style.display = 'none';
+  }
+
+  // Slideshow functionality
+  var slideshowImages = document.querySelectorAll('.slideshow img');
+  var currentImageIndex = 0;
+
+  function showNextImage() {
+    slideshowImages[currentImageIndex].style.display = 'none';
+    currentImageIndex = (currentImageIndex + 1)
+    if(currentImageIndex==document.querySelectorAll('.slideshow img').length){
+        currentImageIndex=0;
+    }
+    slideshowImages[currentImageIndex].style.display = 'block';
+  }
+
+  setInterval(showNextImage, 3000); 
+</script>
+
+</body>
+</html>
