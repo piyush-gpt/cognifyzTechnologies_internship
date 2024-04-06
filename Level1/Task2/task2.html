@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family:'Courier New', Courier, monospace;
+            background-color: aqua;
+        }
+        div{
+            display: flex;
+            height: 90vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        h2{
+            text-align: center;
+            font-size: 50px;
+            text-decoration: underline;
+        }
+        input{
+            padding: 10px;
+            margin: 5px;
+            font-size: 18px;
+            background-color: coral;
+            color: black;
+        }
+
+        button {
+        height: 38px;
+        width: 75px;
+        font-size: large;
+    }
+    </style>
+</head>
+<body>
+    <h2>Calculator</h2>
+    <div>
+        <input type="number" id="num1" placeholder="Enter first number">
+        <input type="number" id="num2" placeholder="Enter second number">
+        <button id="Submit" onclick="ans()"> Add</button>
+        <br>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function ans() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            var result = num1 + num2;
+            document.getElementById("result").innerText = "Sum: " + result;
+            changeColor();
+        }
+
+        function changeColor() {
+            var button = document.getElementById("Submit");
+            button.style.backgroundColor = "blue";
+            setTimeout(function() {
+                button.style.backgroundColor = ""; 
+            }, 2000);
+        }
+
+        function display() {
+            let currentTime = new Date();
+            let hour = currentTime.getHours();
+            let show;
+
+            if (hour < 12) {
+                show = "Good morning, hope you are doing well!";
+            } else if (hour < 18) {
+                show = "Good afternoon, hope you are doing well!";
+            } else {
+                show = "Good evening, hope you are doing well!";
+            }
+
+            alert(show);
+        }
+        display();
+    </script>
+</body>
+</html>
